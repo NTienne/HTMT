@@ -13,9 +13,25 @@ string decimalToBinary8bit(int n)
 	return bin;
 }
 
+string sign_magnitude(int decimal)
+{
+	if (abs(decimal) > 127)
+		return "overflow";
+	
+	string s_mgt = decimalToBinary8bit(abs(decimal));
+	if (decimal < 0)
+	{
+		s_mgt[0] = '1';
+	}
+	return s_mgt;
+}
+
 int main()
 {
-	string bin=decimalToBinary8bit(5);
-	cout<<bin<<endl;
+	int decimal;
+	cout << "Input: ";
+	cin >> decimal;
+	
+	cout <<  "Output a: " << sign_magnitude(decimal) << endl;
 	return 0;
 }
