@@ -14,6 +14,18 @@ string decimalToBinary8bit(int n)
 	return bin;
 }
 
+string sign_magnitude(int decimal)
+{
+	if (abs(decimal) > 127)
+		return "Overflow";
+	
+	string s_mgt = decimalToBinary8bit(abs(decimal));
+	if (decimal < 0)
+	{
+		s_mgt[0] = '1';
+	}
+	return s_mgt;
+}
 
 string complement1s(int n)
 {
@@ -24,8 +36,7 @@ string complement1s(int n)
 	}
 	else
 	{
-		cout<<"Overflow"<<endl;
-		return "";
+		return "Overflow";
 	}
 }
 
@@ -46,17 +57,19 @@ string complement2s(int n)
 	}
 	else
 	{
-		cout<<"Overflow"<<endl;
-		return "";
+		return "Overflow";
 	}
 	
 }
 
 int main()
 {
-	string bin=complement1s(-128);
-	cout<<bin<<endl;
-	bin=complement2s(-128);
-	cout<<bin<<endl;
+	int decimal;
+	cout << "Input: ";
+	cin >> decimal;
+	
+	cout << "Output a: " << sign_magnitude(decimal) << endl;
+	cout << "Output b: " << complement1s(decimal) << endl;
+	cout << "Output c: " << complement2s(decimal) << endl;
 	return 0;
 }
