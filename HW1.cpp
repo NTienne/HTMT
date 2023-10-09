@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 using namespace std;
 
 string decimalToBinary8bit(int n)
@@ -13,25 +14,49 @@ string decimalToBinary8bit(int n)
 	return bin;
 }
 
-string sign_magnitude(int decimal)
+
+string complement1s(int n)
 {
-	if (abs(decimal) > 127)
-		return "overflow";
-	
-	string s_mgt = decimalToBinary8bit(abs(decimal));
-	if (decimal < 0)
+	if (n>=-127 && n<=127)
 	{
-		s_mgt[0] = '1';
+		if (n>=0) return decimalToBinary8bit(n);
+		else return decimalToBinary8bit(abs(n) ^ 255);
 	}
-	return s_mgt;
+	else
+	{
+		cout<<"Overflow"<<endl;
+		return "";
+	}
+}
+
+string complement2s(int n)
+{
+	if (n>=-128 && n<=127)
+	{
+		if (n>=0) return decimalToBinary8bit(n);
+		else
+		{
+			string bin=decimalToBinary8bit(abs(n) ^ 255);
+			int i;
+			for (i=bin.size()-1; bin[i] !='0' && i>0 ; i--)
+				bin[i]='0';
+			bin[i] = '1';
+			return bin;
+		}
+	}
+	else
+	{
+		cout<<"Overflow"<<endl;
+		return "";
+	}
+	
 }
 
 int main()
 {
-	int decimal;
-	cout << "Input: ";
-	cin >> decimal;
-	
-	cout <<  "Output a: " << sign_magnitude(decimal) << endl;
+	string bin=complement1s(-128);
+	cout<<bin<<endl;
+	bin=complement2s(-128);
+	cout<<bin<<endl;
 	return 0;
 }
