@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 using namespace std;
 
 string decimalToBinary8bit(int n)
